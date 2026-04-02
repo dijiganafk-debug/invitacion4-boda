@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: black;
+}
+
+/* CONTENEDOR */
+.fondo {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+
+/* IMAGEN */
+.fondo img {
+    width: 100%;
+    display: block;
+}
+
+/* BOTONES */
+.boton {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    padding: 14px;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 28px;
+    text-decoration: none;
+}
+
+/*  CONFIRMAR (AJUSTADO EXACTO) */
+.confirmar {
+    top: 91%;
+    background: #d4b06a;
+    color: black;
+    height: 60px;
+}
+
+/*  NO ASISTIR (AJUSTADO EXACTO) */
+.no {
+    top: 94%;
+    margin-top: 30px;
+    height: 65px;
+    background: #6b6b6b;
+    color: white;
+}
+
+/* ========================= */
+/*  UBICACIONES */
+/* ========================= */
+
+.mapa1, .mapa2, .mapa3 {
+    position: absolute;
+    transition: transform 0.3s ease;
+}
+
+.mapa1:hover, .mapa2:hover, .mapa3:hover {
+    transform: scale(1.1);
+}
+
+/* UNION CIVIL */
+.mapa1 {
+    top: 37%;
+    left: 69%;
+    width: 15%;
+    height: 40px;
+    transform: translateY(30px);
+}
+
+/* RELIGIOSA */
+.mapa2 {
+    top: 38%;
+    left: 81%;
+    width: 15%;
+    height: 40px;
+    transform: translateY(25px);
+}
+
+/* RECEPCION */
+.mapa3 {
+    top: 39%;
+    left: 81%;
+    width: 15%;
+    height: 40px;
+    transform: translateY(16px);
+}
+
+/*  AJUSTE CELULAR */
+@media (max-width: 480px) {
+
+    .boton {
+        font-size: 18px;
+        width: 75%;
+        padding: 12px;
+    }
+
+    .confirmar {
+        top: 91%;
+    }
+
+    .no {
+        top: 94%;
+        margin-top: 4px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!--  MUSICA -->
+<audio id="musica" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let musica = document.getElementById("musica");
+
+function iniciarMusica() {
+    musica.volume = 0;
+
+    musica.play().then(() => {
+        let subir = setInterval(() => {
+            if (musica.volume < 1) {
+                musica.volume += 0.05;
+            } else {
+                clearInterval(subir);
+            }
+        }, 200);
+    }).catch(() => {});
+}
+
+document.addEventListener("click", iniciarMusica, { once: true });
+
+window.addEventListener("pageshow", () => {
+    musica.play().catch(() => {});
+});
+</script>
+
+<div class="fondo">
+
+    <!--  IMAGEN -->
+    <img src="img/fondo.png">
+
+    <!-- 📍 UBICACIONES -->
+    <a class="mapa1" href="https://www.google.com/maps/place/Club+Oruro/@-17.9697152,-67.114787,17z/data=!3m1!4b1!4m6!3m5!1s0x93e2b100412b0f1f:0x84c79d2b77f40e45!8m2!3d-17.9697203!4d-67.1122121!16s%2Fg%2F11ys35tsh1?entry=tts&g_ep=EgoyMDI2MDMyNC4wIPu8ASoASAFQAw%3D%3D&skid=b658a4c1-4fcd-4b2b-b0e2-ca6c03641549" target="_blank"></a>
+    <a class="mapa2" href="https://www.google.com/maps/place/Catedral+de+Nuestra+Señora+de+la+Asunción/@-17.969317,-67.113652,20z/data=!4m6!3m5!1s0x93e2b0bc5c99f203:0x5a5ae24a3d1a2e76!8m2!3d-17.969231!4d-67.1136223!16s%2Fg%2F1tff43cc?entry=ttu&g_ep=EgoyMDI2MDMzMS4wIKXMDSoASAFQAw%3D%3D" target="_blank"></a>
+    <a class="mapa3" href="https://www.google.com/maps/place/Club+Oruro/@-17.9697152,-67.114787,17z/data=!3m1!4b1!4m6!3m5!1s0x93e2b100412b0f1f:0x84c79d2b77f40e45!8m2!3d-17.9697203!4d-67.1122121!16s%2Fg%2F11ys35tsh1?entry=tts&g_ep=EgoyMDI2MDMyNC4wIPu8ASoASAFQAw%3D%3D&skid=b658a4c1-4fcd-4b2b-b0e2-ca6c03641549" target="_blank"></a>
+
+    <!--  CONFIRMAR -->
+    <a class="boton confirmar"
+    href="https://wa.me/59179400402?text=Si,%20confirmamos%20nuestra%20asistencia%20a%20la%20boda%20de%20Valquiria%20y%20David%20💍%20este%2025%20de%20Abril.%0ANuestros%20nombres%20son:%0A1.%20%0A2.%20%0A3.%20%0A4.%20">
+    Confirmar (4 personas)
+    </a>
+
+    <!--  NO -->
+    <a class="boton no"
+    href="https://wa.me/59179400402?text=Hola,%20lamentablemente%20no%20podremos%20asistir%20a%20la%20boda.%0ANuestros%20nombres%20son:%0A1.%20%0A2.%20%0A3.%20%0A4.%20">
+    No asistir (4 personas)
+    </a>
+
+</div>
+
+</body>
+</html>
